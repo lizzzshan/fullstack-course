@@ -7,7 +7,12 @@ const Statistics = (props) => {
   //console.log(sum)
   const average = sum
   console.log("total", props.total)
-  // TODO: average calculation variable const avg = sum
+  // Only return if feedbak is given
+  if (props.total == 0){
+    return(
+      <p> No feedback given</p>
+    )
+  }
   return(
     <p>
       Good {props.good}  
