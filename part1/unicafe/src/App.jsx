@@ -1,25 +1,53 @@
 import { useState } from 'react'
-
+const StatisticLine = (props) => {
+  console.log(props)
+  // Add percentage sign if positive text
+  if(props.text == "Positive"){
+    return(
+      <div>
+        <td><tr> {props.text}: {props.value} % </tr></td> 
+      </div>
+    )
+  }
+  return(
+    <div>
+      <td><tr>{props.text}: {props.value} </tr></td>
+    </div>
+  )
+}
 const Statistics = (props) => {
   //console.log(props)
   // Calculate sum
   const sum = props.good + props.bad + props.neutral
   //console.log(sum)
-  const average = sum
-  console.log("total", props.total)
-  // TODO: average calculation variable const avg = sum
+  const average = ((props.good) + (props.bad * -1)) / sum
+  const positive = (props.good) / sum
+
+  // Debug - check for errors within the console log
+  console.log("total", sum)
+  console.log("Average", average)
+  console.log("Positive", positive)
+
+  // Only return if feedbak is given
+  if (sum == 0){
+    return(
+      <p> No feedback given</p>
+    )
+  }
   return(
-    <p>
-      Good {props.good}  
-      <br></br>
-      Neutral {props.neutral} 
-      <br></br>
-      Bad {props.bad}
-      <br></br>
-      All {sum}
-      <br></br>
-      Average {sum / props.total}
-    </p>
+    <div>
+      <table>
+        <body>
+        <StatisticLine text="Good" value ={props.good} />
+        <StatisticLine text="Neutral" value ={props.neutral} />
+        <StatisticLine text="Bad" value ={props.bad} />
+        <StatisticLine text="All" value ={sum} />
+        <StatisticLine text="Average" value ={average} />
+        <StatisticLine text="Positive" value ={positive} />
+        </body>
+      </table>
+      
+    </div>
   )
 }
 
@@ -29,26 +57,21 @@ const App = () => {
   const [good, setGood] = useState(0)
   const [neutral, setNeutral] = useState(0)
   const [bad, setBad] = useState(0)
-  //adding total num of clicks variable to calculate the average
-  const [total, setTotal]= useState(0)
 
   // Button handlers 
   const handleGoodClick = () => {
     setGood(good + 1) //Note to self, the setGood function needs to be within the function where the variables are originally defined
-    setTotal(total+1)
     console.log("Good: ",good)
   }
   const handleNeutralClick = () => {
-    setNeutral(neutral)  // No math needed since +0 
+    setNeutral(neutral + 1) 
     //Note to self, the setGood function needs to be within the function where the variables are originally defined
     console.log("Neutral: ",neutral) 
-    setTotal(total+1)
   }
   const handleBadClick = () => {
-    setBad(bad - 1) 
+    setBad(bad + 1) 
     //Note to self, the setGood function needs to be within the function where the variables are originally defined
     console.log("Bad: ", bad) 
-    setTotal(total+1)
   }
 
 
@@ -59,7 +82,7 @@ const App = () => {
       <button onClick={handleNeutralClick}>Neutral</button>
       <button onClick={handleBadClick}>Bad</button>
       <h1> Statistics </h1>
-      <Statistics good = {good} neutral = {neutral} bad = {bad} total = {total}/>
+      <Statistics good = {good} neutral = {neutral} bad = {bad}/>
 
       
     </div>
