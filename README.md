@@ -4,10 +4,10 @@ Self paced course submissions for the Full Stack Open class: https://fullstackop
 Learn React, Redux, Node.js, MongoDB, GraphQL and TypeScript in one go! This course will introduce you to modern JavaScript-based web development. The main focus is on building single page applications with ReactJS that use REST APIs built with Node.js.
 
 # Chapters
-**Part 0**  
+**Part 0** - [Finished](https://github.com/lizzzshan/fullstack-open/tree/main/part0)    
 Fundamentals of Web apps
   
-**Part 1**  
+**Part 1**  - [Finished](https://github.com/lizzzshan/fullstack-open/tree/main/part1)    
 Introduction to React
 
 **Part 2**  
