@@ -1,10 +1,10 @@
 # Preview of finished assignments
 
 ## courseinfo
-![courseinfo screenshot](./img/courseinfo.png)
+![courseinfo screenshot](../img/courseinfo.png)
 
 ## unicafe
-![unicafe screenshot](./img/unicafe.png)
+![unicafe screenshot](../img/unicafe.png)
 
 ## anecdotes 
-![anecdotes screenshot](./img/anecdotes.png)
+![anecdotes screenshot](../img/anecdotes.png)
