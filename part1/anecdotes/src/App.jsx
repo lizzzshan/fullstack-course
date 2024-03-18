@@ -1,5 +1,7 @@
 import { useState } from 'react'
 
+
+// TODO: Add vote func to display total votes on selected anecdote
 const App = () => {
   const anecdotes = [
     'If it hurts, do it more often.',
@@ -13,9 +15,16 @@ const App = () => {
   ]
    
   const [selected, setSelected] = useState(0)
+  const [voted, setVoted] = useState(0)
 
   const handleAnecdote = () => {
     setSelected(Math.floor(Math.random() * anecdotes.length))
+  }
+
+  const handleVote = () => {
+    const voteArr = [...voted] // Create copy of the vote array
+    voteArr[selected] += 1
+    setVoted = (voteArr)
   }
 
   return (
@@ -23,6 +32,7 @@ const App = () => {
       {anecdotes[selected]}
       <br></br>
       <br></br>
+      <button onClick={handleVote}>Vote</button>
       <button onClick={handleAnecdote}>Next anecdote</button>
     </div>
   )
