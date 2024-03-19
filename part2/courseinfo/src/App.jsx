@@ -2,10 +2,15 @@
 const Course = (prop) => {
   //console.log(prop.course.parts[1].name)
   const partInfo = prop.course.parts.map(part => <p key={part.id}>{part.name} {part.exercises}</p>)
+  
+  const total = prop.course.parts.reduce((sum,currentValue) => sum + currentValue.exercises, 0)
+  //console.log(total)
+  
   return (
     <div>
       <h1>{prop.course.name}</h1>
       {partInfo} 
+      <p>Total courses: {total}</p>
     </div>
   )
 }
@@ -30,7 +35,7 @@ const App = () => {
         name: 'State of a component',
         exercises: 14,
         id: 3
-      }
+      },
     ]
   }
   return <Course course={course} />
