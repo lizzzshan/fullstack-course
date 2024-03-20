@@ -25,12 +25,20 @@ const Content = (props) => {
 
 // TODO: Implement total 
 const Total = (props) => {
-    console.log(props)
+    //console.log(props.total)
+    const exerciseTotal = props.total.reduce((s,p) => s + p.exercises, 0)
+    //console.log(classTotal)
+
+    return (
+        <div>
+            <b> Total of {exerciseTotal} exercises</b>
+        </div>
+    )
 }
 
 const Course = (props) => {
     // console.log("Header name",props.course.name)
-    console.log(props.course)
+    //console.log(props.course.parts)
     return (
         <div>
             <Header header={props.course.name}/>
