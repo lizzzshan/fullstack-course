@@ -26,12 +26,11 @@ const App = () => {
 
   const addName = (event) =>{
     event.preventDefault()
-    const uniqueId = Math.floor(Math.random()) // TODO: fix this ID issue where it doesn't seem to check for unique IDs
     //console.log('button clicked', event.target)
     const newPerson = {
       name: newName,
       number: newNumber,
-      id: uniqueId
+      id: persons.length + 1
     }
 
     //console.log(persons.name)
