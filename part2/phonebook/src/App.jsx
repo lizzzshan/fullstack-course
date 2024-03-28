@@ -4,13 +4,11 @@ import { useState } from 'react'
 const Person = (props) => {
   //console.log(props.person[0].name)
   // Map to the name and number to display persons obj
-  const name = props.person.map(prop => prop.name)
-  const number = props.person.map(prop => prop.number)
-  console.log(number)
-  //console.log(name)
+  const display = props.person.map(prop => <div key ={prop.id}> {prop.name} {prop.number}</div> )
+  //console.log(display)
   return(
     <div>
-      {name} {number}
+      {display} 
     </div>
   )
 }
@@ -28,10 +26,12 @@ const App = () => {
 
   const addName = (event) =>{
     event.preventDefault()
+    const uniqueId = Math.floor(Math.random()) // TODO: fix this ID issue where it doesn't seem to check for unique IDs
     //console.log('button clicked', event.target)
     const newPerson = {
       name: newName,
-      number: newNumber
+      number: newNumber,
+      id: uniqueId
     }
 
     //console.log(persons.name)
