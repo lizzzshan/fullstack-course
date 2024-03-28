@@ -9,14 +9,28 @@ const App = () => {
   const addName = (event) =>{
     event.preventDefault()
     //console.log('button clicked', event.target)
+    
     const newPerson = {
       name: newName
     }
 
-    setPersons(persons.concat(newPerson))
-    setNewName('')
+    //console.log(persons.name)
+    const checkName = persons.find(props => props.name.toLowerCase() === newPerson.name.toLowerCase())
+    //console.log(checkName)
+
+    // If checkName is not undefined, duplicate already exists. Give an alert and do not add
+    if (checkName){
+      alert(`${newName} is already added to phonebook`)
+    }
+    else{
+      //Add new person to persons
+      setPersons(persons.concat(newPerson))
+      setNewName('')
+    }
 
     console.log(persons)
+
+    //console.log(persons)
   }
 
   const handleNameChange = (event) =>{
