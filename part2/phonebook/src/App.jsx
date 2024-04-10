@@ -1,18 +1,32 @@
 import { useState } from 'react'
 
-//TODO: Put this in components document
-const Person = (props) => {
-  //console.log(props.person[0].name)
-  // Map to the name and number to display persons obj
-  const display = props.person.map(prop => <div key ={prop.id}> {prop.name} {prop.number}</div> )
-  //console.log(display)
+const Filter = ({text, value, handleNewChange}) => {
   return(
     <div>
-      {display} 
+      {text} <input value={value} onChange={handleNewChange}/>
     </div>
   )
 }
+// Not Needed
+// const Person = (props) => {
+//   //console.log(props.person[0].name)
+//   // Map to the name and number to display persons obj
+//   const display = props.person.map(prop => <div key ={prop.id}> {prop.name} {prop.number}</div> )
+//   //console.log(display)
+//   return(
+//     <div>
+//       {display} 
+//     </div>
+//   )
+// }
 
+const Persons = ({personFilter}) => {
+  return(
+    <div>
+      {personFilter}
+    </div>
+  )
+}
 
 const App = () => {
   const [persons, setPersons] = useState([
@@ -23,15 +37,16 @@ const App = () => {
   ])
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
-
+  const [showAll, setShowAll] = useState(true)
+  const [filterName,setFilterName] = useState('')
+  
   const addName = (event) =>{
     event.preventDefault()
-    const uniqueId = Math.floor(Math.random()) // TODO: fix this ID issue where it doesn't seem to check for unique IDs
     //console.log('button clicked', event.target)
     const newPerson = {
       name: newName,
       number: newNumber,
-      id: uniqueId
+      id: persons.length + 1
     }
 
     //console.log(persons.name)
@@ -64,9 +79,28 @@ const App = () => {
     setNewNumber(event.target.value)
   }
 
+  const handleNewFilter = (event) => {
+    setFilterName(event.target.value)
+  }
+
+  const filter = persons.map(props => props.name.toLowerCase().includes(filterName.toLowerCase()))?
+  persons.filter(props => props.name.toLowerCase().includes(filterName.toLowerCase()))
+  : persons
+  
+  const People = ({name, number,id}) => {
+    return(
+      <li>{name} {number} </li>
+    )
+  }
+  const personFilter = filter.map(props => <People key ={props.id} name ={props.name} number ={props.number} id ={props.id}/>)
   return (
     <div>
       <h2>Phonebook</h2>
+      <div>
+        <Filter text = 'enter name' value={filterName} handleNewChange={handleNewFilter}/>
+      </div>
+       
+      <h2>Add a new contact</h2>
       <form onSubmit={addName}>
         <div>
           name: <input value={newName} onChange={handleNameChange}/>
@@ -80,7 +114,7 @@ const App = () => {
       </form>
       <h2>Numbers</h2>
       <div>
-        <Person person={persons}/>
+        <Persons personFilter={personFilter}/>
       </div>
     </div>
   )
